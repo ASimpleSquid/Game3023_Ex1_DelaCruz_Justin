@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine;
 
-public class PlayButton : MonoBehaviour
+public class ResumeButton : MonoBehaviour
 {
-    public void OnPlayButtonPressed()
+    public void OnResumeButtonPressed()
     {
-        PlayerPrefs.SetInt("TimeToLoad", 0);//new
+        PlayerPrefs.SetInt("TimeToLoad", 1);//load
         PlayerPrefs.Save();
         SceneManager.LoadScene("SampleScene");
     }
