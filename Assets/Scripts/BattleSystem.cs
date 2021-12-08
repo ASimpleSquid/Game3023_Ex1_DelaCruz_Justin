@@ -12,6 +12,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject Player;
     public GameObject Enemy;
 
+    public Animator SceneTransition;
+
     Unit playerUnit;
     Unit enemyUnit;
 
@@ -27,7 +29,15 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.START;
         StartCoroutine(SetupBattle());
     }
+    IEnumerator LoadLevel()
+    {
+        SceneTransition.SetTrigger("Start");
 
+        yield return new WaitForSeconds(1f);
+
+        SceneManager.LoadScene("SampleScene");
+
+    }
     IEnumerator SetupBattle()
     {
         GameObject playerGO = Instantiate(Player);
@@ -98,12 +108,13 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(EnemyTurn());
     }
 
-    void EndBattle()
+    IEnumerator EndBattle()
     {
         if (state == BattleState.WON)
         {
             dialogueText.text = "You Won!";
-            SceneManager.LoadScene("SampleScene");
+            yield return new WaitForSeconds(2f);
+            StartCoroutine("LoadLevel");
         }
         else if (state == BattleState.LOST)
         {
@@ -156,6 +167,6 @@ public class BattleSystem : MonoBehaviour
             return;
 
         dialogueText.text = "You Fled The Battle!";
-        SceneManager.LoadScene("SampleScene");
+        StartCoroutine("LoadLevel");
     }
 }
