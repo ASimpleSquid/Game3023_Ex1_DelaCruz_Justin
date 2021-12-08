@@ -116,6 +116,7 @@ public class BattleSystem : MonoBehaviour
     {
         dialogueText.text = "The enemy just stands there, menacingly...";
         yield return new WaitForSeconds(2f);
+
         state = BattleState.PLAYERTURN;
         PlayerTurn();
     }
