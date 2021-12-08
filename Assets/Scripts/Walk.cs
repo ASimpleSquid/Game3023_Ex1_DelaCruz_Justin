@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Walk : MonoBehaviour
 {
     // This is to ensure the speed is set at a stable 1. This can be modified in Unity
@@ -13,6 +13,14 @@ public class Walk : MonoBehaviour
     public Animator animator;
 
     private Rigidbody2D _rigidbody;
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            SceneManager.LoadScene("ActionScene");
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
